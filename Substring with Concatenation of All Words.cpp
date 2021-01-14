@@ -6,17 +6,20 @@ using namespace std;
 vector<int> findSubstring(string s, vector<string>& words) {
     vector<int> res;
     int len = words[0].length(); 
+
+    if(s.length() < words.size()*len) {
+        return res;
+    }
     for(int start = 0; start <= s.length() - words.size()*len; ++start) {
         unordered_multiset<string> words_set(words.begin(), words.end());
         int pos = start;
         while(pos <= s.length() - len) {
             string str = s.substr(pos,len);
-            cout << str << " ";
+            //cout << str << " ";
             unordered_multiset<string>::iterator it;
             it = words_set.find(str);
             if(it != words_set.end()) {
                 words_set.erase(it);
-
                 if(words_set.empty()) {
                     res.push_back(start);
                     break;
@@ -26,7 +29,7 @@ vector<int> findSubstring(string s, vector<string>& words) {
             }
             pos += len;
         }
-        cout << endl;
+        //cout << endl;
     }
     return res;
 }
