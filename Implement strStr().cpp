@@ -5,19 +5,17 @@ int strStr(string haystack, string needle) {
         return 0;
     }
     int pos = 0;
-    for(string::iterator it = haystack.begin(); it!=haystack.end(); ++it) {
-        int distance = 0;
-        for(string::iterator target = needle.begin(); target!=needle.end(); ++target) {
-            if(*(it+distance) != *target) {
-                break;
-            }
+    int n = haystack.length() - needle.length() + 1;
+    for(int i = 0; i < n; ++i) {
+        int distance = 0, k = i;
+        while(distance < needle.length() && haystack[k] == needle[distance]) {
+            ++k;
             ++distance;
-            if(distance ==  needle.size()) {
-                //cout << distance;
-                return pos;
-            }
         }
-        ++pos;
+        if(distance ==  needle.length()) {
+            //cout << distance;
+            return i;
+        }
     }       
     return -1;
 }

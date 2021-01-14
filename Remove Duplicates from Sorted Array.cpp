@@ -6,15 +6,14 @@ int removeDuplicates(vector<int>& nums) {
     if(nums.size() < 2) {
         return nums.size();
     }
-    int index = 1;
-    while(index < nums.size()) {
-        if(nums[index] == nums[index-1]) {
-            nums.erase(nums.begin() + index);
-        } else {
+    int index = 0;
+    for(int i = 1; i < nums.length(); ++i) {
+        if(nums[i] != nums[index]) {
             ++index;
+            nums[index] = nums[i];
         }
     }
-    return nums.size();
+    return index+1;
 }
 int main() {
     vector<int> inp {0,0,1,1,1,2,2,3,3,4};
